@@ -14,10 +14,12 @@ const _ = require("lodash");
 app.set("view engine","ejs");
 //using body-parser
 app.use(bodyParser.urlencoded({extended:true}));
+//using dotenv library
+require('dotenv').config()
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://deveshsoni2000:XlnwXoDiz8SJ1AMi@cluster0.ccpbl9u.mongodb.net/todolistDB",{useNewUrlParser: true});
+mongoose.connect(process.env.MONGO_URI+"/todolistDB",{useNewUrlParser: true});
 mongoose.set('strictQuery', true);
 // console.log(date.getDay());
 
@@ -163,6 +165,6 @@ app.post("/delete",function(req,res){
 })
 
 
-app.listen(3000,function(){
-    console.log("Server started at 3000 PORT");
+app.listen(process.env.PORT,function(){
+    console.log("Server started at PORT");
 });
